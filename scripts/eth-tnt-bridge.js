@@ -14,7 +14,7 @@ const bridgeEth = new web3Eth.eth.Contract(
 
 const bridgeTnt = new web3Tnt.eth.Contract(
   BridgeTnt.abi,
-  BridgeTnt.networks['97'].address
+  BridgeTnt.networks['365'].address
 );
 
 bridgeEth.events.Transfer(

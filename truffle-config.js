@@ -70,22 +70,6 @@ module.exports = {
       network_id: 4, //rinkeby
       skipDryRun: true
     },
-    tntTestnet: {
-      provider: () => new HDWalletProvider(
-        mnemonic,
-        'https://data-seed-pretnt-1-s1.binance.org:8545'
-      ),
-      network_id: 97,
-      skipDryRun: true
-    },
-    tntTestnet: {
-      provider: () => new HDWalletProvider(
-        mnemonic,
-        'https://data-seed-pretnt-1-s1.binance.org:8545'
-      ),
-      network_id: 97,
-      skipDryRun: true
-    },
     theta_privatenet: {
       provider: () => {
         // private key for test wallet #1: 0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A 
