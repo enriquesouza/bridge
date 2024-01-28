@@ -18,27 +18,27 @@ const bridgeTnt = new web3Tnt.eth.Contract(
 );
 
 bridgeEth.events.Transfer(
-  {fromBlock: 0, step: 0}
+  { fromBlock: 0, step: 0 }
 )
-.on('data', async event => {
-  const { from, to, amount, date, nonce, signature } = event.returnValues;
+  .on('data', async event => {
+    const { from, to, amount, date, nonce, signature } = event.returnValues;
 
-  const tx = bridgeTnt.methods.mint(from, to, amount, nonce, signature);
-  const [gasPrice, gasCost] = await Promise.all([
-    web3Tnt.eth.getGasPrice(),
-    tx.estimateGas({from: admin}),
-  ]);
-  const data = tx.encodeABI();
-  const txData = {
-    from: admin,
-    to: bridgeTnt.options.address,
-    data,
-    gas: gasCost,
-    gasPrice
-  };
-  const receipt = await web3Tnt.eth.sendTransaction(txData);
-  console.log(`Transaction hash: ${receipt.transactionHash}`);
-  console.log(`
+    const tx = bridgeTnt.methods.mint(from, to, amount, nonce, signature);
+    const [gasPrice, gasCost] = await Promise.all([
+      web3Tnt.eth.getGasPrice(),
+      tx.estimateGas({ from: admin }),
+    ]);
+    const data = tx.encodeABI();
+    const txData = {
+      from: admin,
+      to: bridgeTnt.options.address,
+      data,
+      gas: gasCost,
+      gasPrice
+    };
+    const receipt = await web3Tnt.eth.sendTransaction(txData);
+    console.log(`Transaction hash: ${receipt.transactionHash}`);
+    console.log(`
     Processed transfer:
     - from ${from} 
     - to ${to} 
@@ -46,4 +46,4 @@ bridgeEth.events.Transfer(
     - date ${date}
     - nonce ${nonce}
   `);
-});
+  });

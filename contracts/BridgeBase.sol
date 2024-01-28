@@ -1,9 +1,13 @@
 pragma solidity 0.8.24;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./Itoken.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-contract BridgeBase {
+contract BridgeBase is ReentrancyGuard {
+    using SafeMath for uint;
+
     address public admin;
     IToken public token;
     mapping(address => mapping(uint => bool)) public processedNonces;
@@ -32,7 +36,7 @@ contract BridgeBase {
         uint amount,
         uint nonce,
         bytes calldata signature
-    ) external {
+    ) external nonReentrant {
         require(
             processedNonces[msg.sender][nonce] == false,
             "transfer already processed"
@@ -56,10 +60,8 @@ contract BridgeBase {
         uint amount,
         uint nonce,
         bytes calldata signature
-    ) external {
-        bytes32 message = prefixed(
-            keccak256(abi.encodePacked(from, to, amount, nonce))
-        );
+    ) external nonReentrant {
+        bytes32 message = keccak256(abi.encodePacked(from, to, amount, nonce));
         require(recoverSigner(message, signature) == from, "wrong signature");
         require(
             processedNonces[from][nonce] == false,
@@ -78,22 +80,11 @@ contract BridgeBase {
         );
     }
 
-    function prefixed(bytes32 hash) internal pure returns (bytes32) {
-        return
-            keccak256(
-                abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)
-            );
-    }
-
     function recoverSigner(
         bytes32 message,
         bytes memory sig
     ) internal pure returns (address) {
-        uint8 v;
-        bytes32 r;
-        bytes32 s;
-
-        (v, r, s) = splitSignature(sig);
+        (uint8 v, bytes32 r, bytes32 s) = splitSignature(sig);
 
         return ecrecover(message, v, r, s);
     }
@@ -101,11 +92,11 @@ contract BridgeBase {
     function splitSignature(
         bytes memory sig
     ) internal pure returns (uint8, bytes32, bytes32) {
-        require(sig.length == 65);
+        require(sig.length == 68, "Invalid signature length");
 
+        uint8 v;
         bytes32 r;
         bytes32 s;
-        uint8 v;
 
         assembly {
             // first 32 bytes, after the length prefix

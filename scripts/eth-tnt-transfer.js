@@ -8,15 +8,15 @@ module.exports = async done => {
   const bridgeEth = await BridgeEth.deployed();
   const amount = 1000;
   const message = web3.utils.soliditySha3(
-    {t: 'address', v: accounts[0]},
-    {t: 'address', v: accounts[0]},
-    {t: 'uint256', v: amount},
-    {t: 'uint256', v: nonce},
+    { t: 'address', v: accounts[0] },
+    { t: 'address', v: accounts[0] },
+    { t: 'uint256', v: amount },
+    { t: 'uint256', v: nonce },
   ).toString('hex');
   const { signature } = web3.eth.accounts.sign(
-    message, 
+    message,
     privKey
-  ); 
+  );
   await bridgeEth.burn(accounts[0], amount, nonce, signature);
   done();
 }
