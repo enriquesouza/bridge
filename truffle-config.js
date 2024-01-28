@@ -1,0 +1,166 @@
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const mnemonic = '';
+/**
+ * Use this file to configure your truffle project. It's seeded with some
+ * common settings for different networks and features like migrations,
+ * compilation and testing. Uncomment the ones you need or modify
+ * them to suit your project as necessary.
+ *
+ * More information about configuration can be found at:
+ *
+ * trufflesuite.com/docs/advanced/configuration
+ *
+ * To deploy via Infura you'll need a wallet provider (like @truffle/hdwallet-provider)
+ * to sign your transactions before they're sent to a remote public node. Infura accounts
+ * are available for free at: infura.io/register.
+ *
+ * You'll also need a mnemonic - the twelve word phrase the wallet uses to generate
+ * public/private key pairs. If you're publishing your code to GitHub make sure you load this
+ * phrase from a file you've .gitignored so it doesn't accidentally become public.
+ *
+ */
+
+// const HDWalletProvider = require('@truffle/hdwallet-provider');
+// const infuraKey = "fj4jll3k.....";
+//
+// const fs = require('fs');
+// const mnemonic = fs.readFileSync(".secret").toString().trim();
+
+module.exports = {
+  /**
+   * Networks define how you connect to your ethereum client and let you set the
+   * defaults web3 uses to send transactions. If you don't specify one truffle
+   * will spin up a development blockchain for you on port 9545 when you
+   * run `develop` or `test`. You can ask a truffle command to use a specific
+   * network from the command line, e.g
+   *
+   * $ truffle test --network <network-name>
+   */
+
+  networks: {
+    // Useful for testing. The `development` name is special - truffle uses it by default
+    // if it's defined here and no other network is specified at the command line.
+    // You should run a client (like ganache-cli, geth or parity) in a separate terminal
+    // tab if you use this network and you must also set the `host`, `port` and `network_id`
+    // options below to some value.
+    //
+    // development: {
+    //  host: "127.0.0.1",     // Localhost (default: none)
+    //  port: 8545,            // Standard Ethereum port (default: none)
+    //  network_id: "*",       // Any network (default: none)
+    // },
+    // Another network with more advanced options...
+    // advanced: {
+    // port: 8777,             // Custom port
+    // network_id: 1342,       // Custom network
+    // gas: 8500000,           // Gas sent with each transaction (default: ~6700000)
+    // gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
+    // from: <address>,        // Account to send txs from (default: accounts[0])
+    // websockets: true        // Enable EventEmitter interface for web3 (default: false)
+    // },
+    // Useful for deploying to a public network.
+    // NB: It's important to wrap the provider as a function.
+    ethTestnet: {
+      provider: () => new HDWalletProvider(
+        mnemonic,
+        'url to eth node',
+        0,
+        1
+      ),
+      network_id: 4, //rinkeby
+      skipDryRun: true
+    },
+    tntTestnet: {
+      provider: () => new HDWalletProvider(
+        mnemonic,
+        'https://data-seed-pretnt-1-s1.binance.org:8545'
+      ),
+      network_id: 97,
+      skipDryRun: true
+    },
+    tntTestnet: {
+      provider: () => new HDWalletProvider(
+        mnemonic,
+        'https://data-seed-pretnt-1-s1.binance.org:8545'
+      ),
+      network_id: 97,
+      skipDryRun: true
+    },
+    theta_privatenet: {
+      provider: () => {
+        // private key for test wallet #1: 0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A 
+        var privateKeyTest1 = '1111111111111111111111111111111111111111111111111111111111111111';
+
+        // private key for test wallet #2: 0x1563915e194D8CfBA1943570603F7606A3115508
+        var privateKeyTest2 = '2222222222222222222222222222222222222222222222222222222222222222';
+
+        return new HDWalletProvider({
+          privateKeys: [privateKeyTest1, privateKeyTest2],
+          providerOrUrl: 'http://localhost:18888/rpc',
+        });
+      },
+      network_id: 366,
+      gasPrice: 4000000000000,
+    },
+
+    theta_testnet: {
+      provider: () => {
+
+        // Replace the private key below with the private key of the deployer wallet. 
+        // Make sure the deployer wallet has a sufficient amount of TFuel, e.g. 100 TFuel
+        var deployerPrivateKey = '12345';
+
+        return new HDWalletProvider({
+          privateKeys: [deployerPrivateKey],
+          providerOrUrl: 'https://eth-rpc-api-testnet.thetatoken.org/rpc',
+        });
+      },
+      network_id: 365,
+      gasPrice: 4000000000000,
+    },
+
+    theta_mainnet: {
+      provider: () => {
+
+        // Replace the private key below with the private key of the deployer wallet. 
+        // Make sure the deployer wallet has a sufficient amount of TFuel, e.g. 100 TFuel
+        var deployerPrivateKey = '12345';
+
+        return new HDWalletProvider({
+          privateKeys: [deployerPrivateKey],
+          providerOrUrl: 'https://eth-rpc-api.thetatoken.org/rpc',
+        });
+      },
+      network_id: 361,
+      gasPrice: 4000000000000,
+    }
+    // Useful for private networks
+    // private: {
+    // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),
+    // network_id: 2111,   // This network is yours, in the cloud.
+    // production: true    // Treats this network as if it was a public net. (default: false)
+    // }
+  },
+
+  // Set default mocha options here, use special reporters etc.
+  mocha: {
+    enableTimeouts: false,
+    before_timeout: 480000
+  },
+
+
+  // Configure your compilers
+  compilers: {
+    solc: {
+      version: "0.8.0",    // Fetch exact version from solc-bin (default: truffle's version)
+      // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
+      // settings: {          // See the solidity docs for advice about optimization and evmVersion
+      //  optimizer: {
+      //    enabled: false,
+      //    runs: 200
+      //  },
+      //  evmVersion: "byzantium"
+      // }
+    }
+  }
+};
