@@ -12,7 +12,7 @@ module.exports = async function (deployer, network, addresses) {
     const bridgeEth = await BridgeEth.deployed();
     await tokenEth.updateAdmin(bridgeEth.address);
   }
-  if (network === 'tntTestnet') {
+  if (network === 'theta_testnet') {
     await deployer.deploy(TokenTnt);
     const tokenTnt = await TokenTnt.deployed();
     await deployer.deploy(BridgeTnt, tokenTnt.address);
