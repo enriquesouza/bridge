@@ -2,19 +2,21 @@ const Web3 = require('web3');
 const BridgeEth = require('../build/contracts/BridgeEth.json');
 const BridgeTnt = require('../build/contracts/BridgeTnt.json');
 
-const web3Eth = new Web3('url to eth node (websocket)');
-const web3Tnt = new Web3('https://data-seed-pretnt-1-s1.binance.org:8545');
+const web3Eth = new Web3(`ws://localhost:8545`);
+const web3Tnt = new Web3(`http://localhost:18888`);
 const adminPrivKey = '';
 const { address: admin } = web3Tnt.eth.accounts.wallet.add(adminPrivKey);
 
+// Ganache
 const bridgeEth = new web3Eth.eth.Contract(
   BridgeEth.abi,
-  BridgeEth.networks['4'].address
+  BridgeEth.networks['1337'].address
 );
 
+// Theta Private Network
 const bridgeTnt = new web3Tnt.eth.Contract(
   BridgeTnt.abi,
-  BridgeTnt.networks['365'].address
+  BridgeTnt.networks['366'].address
 );
 
 bridgeEth.events.Transfer(

@@ -4,7 +4,7 @@ const BridgeEth = artifacts.require('BridgeEth.sol');
 const BridgeTnt = artifacts.require('BridgeTnt.sol');
 
 module.exports = async function (deployer, network, addresses) {
-  if (network === 'ethTestnet') {
+  if (network === 'development') {
     await deployer.deploy(TokenEth);
     const tokenEth = await TokenEth.deployed();
     await tokenEth.mint(addresses[0], 1000);
@@ -12,7 +12,7 @@ module.exports = async function (deployer, network, addresses) {
     const bridgeEth = await BridgeEth.deployed();
     await tokenEth.updateAdmin(bridgeEth.address);
   }
-  if (network === 'theta_testnet') {
+  if (network === 'theta_privatenet') {
     await deployer.deploy(TokenTnt);
     const tokenTnt = await TokenTnt.deployed();
     await deployer.deploy(BridgeTnt, tokenTnt.address);

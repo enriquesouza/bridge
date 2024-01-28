@@ -1,65 +1,50 @@
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-const mnemonic = '';
-/**
- * Use this file to configure your truffle project. It's seeded with some
- * common settings for different networks and features like migrations,
- * compilation and testing. Uncomment the ones you need or modify
- * them to suit your project as necessary.
- *
- * More information about configuration can be found at:
- *
- * trufflesuite.com/docs/advanced/configuration
- *
- * To deploy via Infura you'll need a wallet provider (like @truffle/hdwallet-provider)
- * to sign your transactions before they're sent to a remote public node. Infura accounts
- * are available for free at: infura.io/register.
- *
- * You'll also need a mnemonic - the twelve word phrase the wallet uses to generate
- * public/private key pairs. If you're publishing your code to GitHub make sure you load this
- * phrase from a file you've .gitignored so it doesn't accidentally become public.
- *
- */
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
-// const infuraKey = "fj4jll3k.....";
-//
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const fs = require('fs');
+const mnemonic = fs.readFileSync('.secret').toString().trim();
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
-  /**
-   * Networks define how you connect to your ethereum client and let you set the
-   * defaults web3 uses to send transactions. If you don't specify one truffle
-   * will spin up a development blockchain for you on port 9545 when you
-   * run `develop` or `test`. You can ask a truffle command to use a specific
-   * network from the command line, e.g
-   *
-   * $ truffle test --network <network-name>
-   */
-
   networks: {
-    // Useful for testing. The `development` name is special - truffle uses it by default
-    // if it's defined here and no other network is specified at the command line.
-    // You should run a client (like ganache-cli, geth or parity) in a separate terminal
-    // tab if you use this network and you must also set the `host`, `port` and `network_id`
-    // options below to some value.
-    //
-    // development: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
-    // },
-    // Another network with more advanced options...
-    // advanced: {
-    // port: 8777,             // Custom port
-    // network_id: 1342,       // Custom network
-    // gas: 8500000,           // Gas sent with each transaction (default: ~6700000)
-    // gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
-    // from: <address>,        // Account to send txs from (default: accounts[0])
-    // websockets: true        // Enable EventEmitter interface for web3 (default: false)
-    // },
-    // Useful for deploying to a public network.
-    // NB: It's important to wrap the provider as a function.
+    development: {
+      host: '127.0.0.1',
+      port: 8545,
+      network_id: '*',
+      allowUnlimitedContractSize: true,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+      websockets: true,
+      networkCheckTimeout: 1000000,
+      provider: () =>
+        new HDWalletProvider({
+          mnemonic: mnemonic,
+          providerOrUrl: `ws://localhost:8545`,
+          numberOfAddresses: 100,
+        }),
+    },
+
+
+    theta_privatenet: {
+      theta_privatenet: {
+        url: "http://localhost:18888/rpc",
+        accounts: [
+          "1111111111111111111111111111111111111111111111111111111111111111", // 0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A
+          "2222222222222222222222222222222222222222222222222222222222222222", // 0x1563915e194D8CfBA1943570603F7606A3115508
+          "3333333333333333333333333333333333333333333333333333333333333333", // 0x5CbDd86a2FA8Dc4bDdd8a8f69dBa48572EeC07FB
+          "4444444444444444444444444444444444444444444444444444444444444444", // 0x7564105E977516C53bE337314c7E53838967bDaC
+          "5555555555555555555555555555555555555555555555555555555555555555", // 0xe1fAE9b4fAB2F5726677ECfA912d96b0B683e6a9
+          "6666666666666666666666666666666666666666666666666666666666666666", // 0xdb2430B4e9AC14be6554d3942822BE74811A1AF9
+          "7777777777777777777777777777777777777777777777777777777777777777", // 0xAe72A48c1a36bd18Af168541c53037965d26e4A8
+          "8888888888888888888888888888888888888888888888888888888888888888", // 0x62f94E9AC9349BCCC61Bfe66ddAdE6292702EcB6
+          "9999999999999999999999999999999999999999999999999999999999999999", // 0x0D8e461687b7D06f86EC348E0c270b0F279855F0
+          "1000000000000000000000000000000000000000000000000000000000000000", // 0x7B2419E0Ee0BD034F7Bf24874C12512AcAC6e21C
+        ],
+        chainId: 366,
+        gasPrice: 4000000000000,
+      },
+      gasPrice: 4000000000000,
+    },
+
     ethTestnet: {
       provider: () => new HDWalletProvider(
         mnemonic,
@@ -69,22 +54,6 @@ module.exports = {
       ),
       network_id: 4, //rinkeby
       skipDryRun: true
-    },
-    theta_privatenet: {
-      provider: () => {
-        // private key for test wallet #1: 0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A 
-        var privateKeyTest1 = '1111111111111111111111111111111111111111111111111111111111111111';
-
-        // private key for test wallet #2: 0x1563915e194D8CfBA1943570603F7606A3115508
-        var privateKeyTest2 = '2222222222222222222222222222222222222222222222222222222222222222';
-
-        return new HDWalletProvider({
-          privateKeys: [privateKeyTest1, privateKeyTest2],
-          providerOrUrl: 'http://localhost:18888/rpc',
-        });
-      },
-      network_id: 366,
-      gasPrice: 4000000000000,
     },
 
     theta_testnet: {
@@ -118,12 +87,6 @@ module.exports = {
       network_id: 361,
       gasPrice: 4000000000000,
     }
-    // Useful for private networks
-    // private: {
-    // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),
-    // network_id: 2111,   // This network is yours, in the cloud.
-    // production: true    // Treats this network as if it was a public net. (default: false)
-    // }
   },
 
   // Set default mocha options here, use special reporters etc.
@@ -136,15 +99,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.24",    // Fetch exact version from solc-bin (default: truffle's version)
-      // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-      // settings: {          // See the solidity docs for advice about optimization and evmVersion
-      //  optimizer: {
-      //    enabled: false,
-      //    runs: 200
-      //  },
-      //  evmVersion: "byzantium"
-      // }
+      version: "0.8.24",
     }
   }
 };
