@@ -1,7 +1,7 @@
-const TokenEth = artifacts.require('TokenEth.sol');
-const TokenTnt = artifacts.require('TokenTnt.sol');
-const BridgeEth = artifacts.require('BridgeEth.sol');
-const BridgeTnt = artifacts.require('BridgeTnt.sol');
+const TokenEth = artifacts.require('TokenEth');
+const TokenTnt = artifacts.require('TokenTnt');
+const BridgeEth = artifacts.require('BridgeEth');
+const BridgeTnt = artifacts.require('BridgeTnt');
 
 module.exports = async function (deployer, network, addresses) {
   if (network === 'development') {

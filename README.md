@@ -34,6 +34,7 @@ sudo spctl --add ./theta-eth-rpc-adaptor
 Note: If you are using a Mac with the M1 chip, you might need to add the arch -arch x86_64 prefix to the commands as shown below:
 
 ```
+cd theta_local_privatenet_macos/bin
 # In the first terminal
 arch -arch x86_64 ./theta start --config=../privatenet/validator --password=qwertyuiop
 
@@ -90,3 +91,6 @@ export SEQ=`./thetacli query account --address=0x2E833968E5bB786Ae419c4d13189fB0
     export SEQ=`arch -arch x86_64 ./thetacli query account --address=0x2E833968E5bB786Ae419c4d13189fB081Cc43bab | grep sequence | grep -o '[[:digit:]]\+'`
 
     arch -arch x86_64 ./thetacli tx send --chain="privatenet" --from=0x2E833968E5bB786Ae419c4d13189fB081Cc43bab --to=0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A --tfuel=1000 --password=qwertyuiop --seq=$(($SEQ+1))
+
+
+

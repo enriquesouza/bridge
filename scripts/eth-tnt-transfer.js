@@ -1,6 +1,13 @@
 const BridgeEth = artifacts.require('./BridgeEth.sol');
 
-const privKey = 'priv key of sender';
+const fs = require('fs');
+const mnemonic = fs.readFileSync('.secret').toString().trim();
+const ethers = require('ethers')
+const wallet = ethers.Wallet.fromPhrase(mnemonic)
+
+const privKey = wallet.privateKey;
+console.log(`Private key: ${wallet.privateKey}`)
+console.log(`Address: ${wallet.address}`)
 
 module.exports = async done => {
   const nonce = 1; //Need to increment this for each new transfer

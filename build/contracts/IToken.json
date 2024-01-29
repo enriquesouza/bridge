@@ -38,7 +38,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"burn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IToken.sol\":\"IToken\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IToken.sol\":{\"keccak256\":\"0x58e925194658792036ba3df168829527fe1ba3a15dacc86ad4c4ad0ebd76777e\",\"urls\":[\"bzz-raw://676463fe2a55e9522b05c2da26b063e4f73c6ff7c0e0f0c5a9a3067e05c24705\",\"dweb:/ipfs/QmSwgQjnQrQ8dANnXzChtN43Kv2C7KVWU3i5ujrqFKGsHC\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"burn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IToken.sol\":\"IToken\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IToken.sol\":{\"keccak256\":\"0x2bca641233b3be805fe7e9483d515391e9b3606d64cac691647ec21146f44321\",\"urls\":[\"bzz-raw://45b647c372a17350d622b6f09c4366aa123db8c1ea52e50970a5c36c277cbdcc\",\"dweb:/ipfs/QmXbB518PcxpgtS44yWtHxDfXVt6MD4Fd4akaTZQBbKnai\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -46,7 +46,7 @@
   "deployedGeneratedSources": [],
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity 0.8.24;\n\ninterface IToken {\n    function mint(address to, uint amount) external;\n\n    function burn(address owner, uint amount) external;\n}\n",
+  "source": "pragma solidity 0.8.19;\n\ninterface IToken {\n    function mint(address to, uint amount) external;\n\n    function burn(address owner, uint amount) external;\n}\n",
   "sourcePath": "/Users/enriquesouzasoares/projects/es_digital/bridge/contracts/IToken.sol",
   "ast": {
     "absolutePath": "project:/contracts/IToken.sol",
@@ -63,7 +63,7 @@
         "literals": [
           "solidity",
           "0.8",
-          ".24"
+          ".19"
         ],
         "nodeType": "PragmaDirective",
         "src": "0:23:9"
@@ -252,19 +252,18 @@
         ],
         "scope": 1398,
         "src": "25:130:9",
-        "usedErrors": [],
-        "usedEvents": []
+        "usedErrors": []
       }
     ],
     "src": "0:156:9"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.8.24+commit.e11b9ed9.Emscripten.clang"
+    "version": "0.8.19+commit.7dd6d404.Emscripten.clang"
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-01-28T02:20:26.182Z",
+  "updatedAt": "2024-01-29T21:05:40.835Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

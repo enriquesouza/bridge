@@ -1,23 +1,40 @@
 const Web3 = require('web3');
 const BridgeEth = require('../build/contracts/BridgeEth.json');
 const BridgeTnt = require('../build/contracts/BridgeTnt.json');
-
 const web3Eth = new Web3(`ws://localhost:8545`);
-const web3Tnt = new Web3(`http://localhost:18888`);
-const adminPrivKey = '';
-const { address: admin } = web3Tnt.eth.accounts.wallet.add(adminPrivKey);
+const web3Tnt = new Web3('ws://127.0.0.1:18889');
+const fs = require('fs');
+const mnemonic = fs.readFileSync('.secret').toString().trim();
+const ethers = require('ethers')
+const wallet = ethers.Wallet.fromPhrase(mnemonic)
+
+// console.log(`Private key: ${wallet.privateKey}`)
+// console.log(`Address: ${wallet.address}`)
+
+const { address: admin } = web3Tnt.eth.accounts.wallet.add(wallet.privateKey);
+
+
+// web3Tnt.eth.getBalance(admin).then(console.log)
+
+web3Tnt.eth.getBalance('0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A').then(console.log)
+
+
+
+// web3Eth.eth.getBalance(admin).then(console.log)
 
 // Ganache
 const bridgeEth = new web3Eth.eth.Contract(
   BridgeEth.abi,
-  BridgeEth.networks['1337'].address
+  //BridgeEth.networks['1337'].address
+  BridgeEth.networks[Object.keys(BridgeEth.networks)[0]].address
 );
 
-// Theta Private Network
+// // Theta Private Network
 const bridgeTnt = new web3Tnt.eth.Contract(
   BridgeTnt.abi,
   BridgeTnt.networks['366'].address
 );
+
 
 bridgeEth.events.Transfer(
   { fromBlock: 0, step: 0 }

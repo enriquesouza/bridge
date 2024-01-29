@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ganache": "rm -rf .ganachedb && npx ganache -m 'liquid brand gaze spare someone toe cause nuclear rug west wash mask' --db './.ganachedb' -a 100"
+    "ganache": "rm -rf .ganachedb && npx ganache -m 'liquid brand gaze spare someone toe cause nuclear rug west wash mask' --db './.ganachedb' -a 10"
   },
   "keywords": [],
   "author": "",

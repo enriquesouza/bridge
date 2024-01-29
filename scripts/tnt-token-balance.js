@@ -1,4 +1,4 @@
-const TokenTnt = artifacts.require('./TokenTnt.sol');
+const TokenTnt = artifacts.require('./TokenTnt');
 
 module.exports = async done => {
   const [recipient, _] = await web3.eth.getAccounts();
