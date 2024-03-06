@@ -1,0 +1,97 @@
+❯ history | grep theta
+    4  cd thetacli
+   20  arch -arch x86_64 ./theta
+   21  arch -arch x86_64 ./theta -h
+   22  mkdir my-theta-network\ncd my-theta-network
+   23  theta init --mnemonic "liquid brand gaze spare someone toe cause nuclear rug west wash mask"
+   24  arch -arch x86_64 ./theta init --mnemonic "liquid brand gaze spare someone toe cause nuclear rug west wash mask"
+   26  arch -arch x86_64 ./theta init --mnemonic "liquid brand gaze spare someone toe cause nuclear rug west wash mask"
+   27  arch -arch x86_64 ./theta init --key "liquid brand gaze spare someone toe cause nuclear rug west wash mask"
+   30  # In the first terminal\narch -arch x86_64 ./theta start --config=../privatenet/validator --password=qwertyuiop\n\n# In the second terminal\narch -arch x86_64 ./theta-eth-rpc-adaptor start --config=../privatenet/eth_rpc_adaptor
+   34  mkdir theta
+   35  cd theta
+   36  git clone https://github.com/thetatoken/theta-web3-examples\ncd theta-web3-examples\nnpm install
+   40  # In the first terminal\narch -arch x86_64 ./theta start --config=../privatenet/validator --password=qwertyuiop\n\n# In the second terminal\narch -arch x86_64 ./theta-eth-rpc-adaptor start --config=../privatenet/eth_rpc_adaptor
+   42  cd theta_local_privatenet_macos
+   45  # In the first terminal\narch -arch x86_64 ./theta start --config=../privatenet/validator --password=qwertyuiop\n\n# In the second terminal\narch -arch x86_64 ./theta-eth-rpc-adaptor start --config=../privatenet/eth_rpc_adaptor
+   47  # In the first terminal\narch -arch x86_64 ./theta start --config=../privatenet/validator --password=qwertyuiop\n\n# In the second terminal\narch -arch x86_64 ./theta-eth-rpc-adaptor start --config=../privatenet/eth_rpc_adaptor
+   58  cat /Users/enriquesouzasoares/.theta-eth-rpc-adaptor/keys
+   59  cd /Users/enriquesouzasoares/.theta-eth-rpc-adaptor/keys
+   68  truffle deploy --network theta_privatenet --reset
+   69  truffle deploy --network theta_privatenet
+   70  npxtruffle deploy --network theta_privatenet
+   71  npx truffle deploy --network theta_privatenet
+   75  \n\n# In the second terminal\narch -arch x86_64 ./theta-eth-rpc-adaptor start --config=../privatenet/eth_rpc_adaptor
+   76  cd theta_local_privatenet_macos
+   84  cd theta_local_privatenet_macos
+   86  arch -arch x86_64 ./theta start --config=../privatenet/validator --password=qwertyuiop
+   88  arch -arch x86_64 ./theta start --config=../privatenet/validator --password=qwertyuiop
+   89  npx truffle deploy --network theta_privatenet
+   90  arch -arch x86_64 ./theta start --config=../privatenet/validator --password=qwertyuiop
+   91  npx truffle deploy --network theta_privatenet
+   93  npx truffle deploy --network theta_privatenet
+   96  npx truffle deploy --network theta_privatenet
+  102  cd theta_local_privatenet_macos/bin
+  103  cd /Users/enriquesouzasoares/.thetacli/keys/encrypted/
+  116  truffle deploy --network theta_privatenet
+  117  npx truffle deploy --network theta_privatenet
+  119  npx truffle deploy --network theta_privatenet --reset
+  121  npx truffle deploy --network theta_privatenet --reset
+  127  npx truffle test scripts/eth-token-balance.js --network theta_privatenet
+  128  npx truffle test scripts/tnt-token-balance.js --network theta_privatenet
+  174  cd my-theta-network
+  177  rm -dfr my-theta-network
+  183  cd theta
+  265  cd theta_local_privatenet_macos/bin
+  266  arch -arch x86_64 ./theta start --config=../privatenet/validator --password=qwertyuiop
+  267  cd theta_local_privatenet_macos/bin
+  268  arch -arch x86_64 ./theta-eth-rpc-adaptor start --config=../privatenet/eth_rpc_adaptor
+  279  npx truffle exec scripts/eth-token-balance.js --network theta_privatenet
+  282  npx truffle migrate --reset --network theta_privatenet
+  283  npx truffle exec scripts/eth-token-balance.js --network theta_privatenet
+  284  npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet
+  288  npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet
+  293  npx truffle migrate --reset --network theta_privatenet
+  296  npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet
+  307  npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet
+  311  npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet
+  312  npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet  
+  332  npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet  
+  343  npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet  
+  345  npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet  
+  349  npx truffle deploy --network theta_privatenet --reset
+  352  npx truffle deploy --network theta_privatenet --reset
+  354  npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet  
+  368  npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet  
+  371  npx truffle deploy --network theta_privatenet --reset
+  378  npx hardhat node --network theta
+  380  npx hardhat deploy --network theta_privatenet.
+  383  npx hardhat run --network theta_privatenet
+  384  npx hardhat run scripts/deploy.js --network theta_privatenet
+  385  npx hardhat run scripts/deploy.js --network theta
+  387  npx hardhat run scripts/deploy.js --network theta
+  390  rm theta_local_privatenet_macos.tar.gz
+  391  cd theta
+ 1266  rm -dfr voltix theta 
+ 1267  rm -dfr theta-protocol-ledger
+ 1271  rm -dfr theta_local_privatenet_macos
+ 1483  rm -dfr theta-hardhat-demo
+ 2570  mkdir theta
+ 2571  cd theta
+ 2572  git clone https://github.com/enriquesouza/theta-bridge
+ 2574  cd theta-bridge
+ 2582  wget https://theta-downloader.s3.amazonaws.com/ethrpc/theta_local_privatenet_macos.tar.gz
+ 2583  tar -xvzf theta_local_privatenet_macos.tar.gz
+ 2584  cd theta_local_privatenet_macos/bin
+ 2585  sudo spctl --add ./theta
+ 2586  sudo spctl --add ./thetacli
+ 2587  sudo spctl --add ./theta-eth-rpc-adaptor
+ 2588  arch -arch x86_64 ./theta start --config=../privatenet/validator --password=qwertyuiop\n
+ 2589  cd theta_local_privatenet_macos/bin
+ 2590  arch -arch x86_64 ./theta-eth-rpc-adaptor start --config=../privatenet/eth_rpc_adaptor
+ 2591  truffle deploy --network theta_privatenet
+ 2592  pxtruffle deploy --network theta_privatenet
+ 2593  npx truffle deploy --network theta_privatenet
+ 2595  npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet  
+
+  ~/projects/theta/theta-bridge on   main !17 ❯                                                                                   at  09:41:42

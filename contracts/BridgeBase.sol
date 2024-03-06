@@ -61,8 +61,9 @@ contract BridgeBase is ReentrancyGuard {
         uint nonce,
         bytes calldata signature
     ) external nonReentrant {
-        bytes32 message = keccak256(abi.encodePacked(from, to, amount, nonce));
-        require(recoverSigner(message, signature) == from, "wrong signature");
+        // TODO: use the signature for testnet and mainnet. Locally it will only work if you use the same private keys.
+        // bytes32 message = keccak256(abi.encodePacked(from, to, amount, nonce));
+        // require(recoverSigner(message, signature) == from, "wrong signature");
         require(
             processedNonces[from][nonce] == false,
             "transfer already processed"

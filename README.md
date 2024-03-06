@@ -1,22 +1,26 @@
-# bridge
+# Theta bridge
 
 https://docs.thetatoken.org/docs/theta-blockchain-tnt20-token-integration-guide
 
-
 Theta Mainnet
+```
 ETH RPC URL: https://eth-rpc-api.thetatoken.org/rpc
 Explorer: https://explorer.thetatoken.org/
 Chain ID: 361
+```
 
 Theta Testnet
+```
 ETH RPC URL: https://eth-rpc-api-testnet.thetatoken.org/rpc
 Explorer: https://testnet-explorer.thetatoken.org/
 Chain ID: 365
+```
 
-On macos
+## Theta local installation
+
+### On MacOS
 
 First, run the following commands in a terminal to download and unzip the Theta local privatenet binaries and configs.
-
 ```
 wget https://theta-downloader.s3.amazonaws.com/ethrpc/theta_local_privatenet_macos.tar.gz
 tar -xvzf theta_local_privatenet_macos.tar.gz
@@ -24,7 +28,6 @@ cd theta_local_privatenet_macos/bin
 ```
 
 Starting with macOS v10.15 Catalina, only signed applications are allowed to run. We need to run the following commands to manually add the downloaded binaries to the allowed applications. You might be prompted to enter your Macbook password or use the touch ID to allow access.
-
 ```
 sudo spctl --add ./theta
 sudo spctl --add ./thetacli
@@ -42,55 +45,69 @@ arch -arch x86_64 ./theta start --config=../privatenet/validator --password=qwer
 arch -arch x86_64 ./theta-eth-rpc-adaptor start --config=../privatenet/eth_rpc_adaptor
 ```
 
+## Publishing on theta
 
-Hardhat Configs
-
-To use these prefunded test wallets for Hardhat, modidfy the hardhat.config.js file to include the following. Then, you can run the test cases with npx hardhat test --network theta_privatenet .
-
+First we need send some coins to pay the gas TFUEL
 ```
-module.exports = {
-  mocha: {
-    timeout: 1000000000,
-  },
-  networks: {
-    theta_privatenet: {
-      url: "http://localhost:18888/rpc",
-      accounts: [
-        "1111111111111111111111111111111111111111111111111111111111111111", // 0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A
-        "2222222222222222222222222222222222222222222222222222222222222222", // 0x1563915e194D8CfBA1943570603F7606A3115508
-        "3333333333333333333333333333333333333333333333333333333333333333", // 0x5CbDd86a2FA8Dc4bDdd8a8f69dBa48572EeC07FB
-        "4444444444444444444444444444444444444444444444444444444444444444", // 0x7564105E977516C53bE337314c7E53838967bDaC
-        "5555555555555555555555555555555555555555555555555555555555555555", // 0xe1fAE9b4fAB2F5726677ECfA912d96b0B683e6a9
-        "6666666666666666666666666666666666666666666666666666666666666666", // 0xdb2430B4e9AC14be6554d3942822BE74811A1AF9
-        "7777777777777777777777777777777777777777777777777777777777777777", // 0xAe72A48c1a36bd18Af168541c53037965d26e4A8
-        "8888888888888888888888888888888888888888888888888888888888888888", // 0x62f94E9AC9349BCCC61Bfe66ddAdE6292702EcB6
-        "9999999999999999999999999999999999999999999999999999999999999999", // 0x0D8e461687b7D06f86EC348E0c270b0F279855F0
-        "1000000000000000000000000000000000000000000000000000000000000000", // 0x7B2419E0Ee0BD034F7Bf24874C12512AcAC6e21C
-      ],
-      chainId: 366,
-      gasPrice: 4000000000000,
-    },
-    ...
- },
- ...
-}
+node scripts/send_signed_transaction.js    
 ```
 
-
-In addition to these prefunded test wallets, the RPC adaptor will create 10 random test wallets the first time it runs, which will be useful for running tests with dev tools like Truffle and Hardhat. 
-
-After the test wallets are created, the ETH RPC APIs will be ready for use. To fund these randomly generated test wallets, you can execute the following command (replace <WALLET_ADDRESS> with the actual address):
-
+Token deploy on Theta
 ```
-export SEQ=`./thetacli query account --address=0x2E833968E5bB786Ae419c4d13189fB081Cc43bab | grep sequence | grep -o '[[:digit:]]\+'`
-./thetacli tx send --chain="privatenet" --from=0x2E833968E5bB786Ae419c4d13189fB081Cc43bab --to=<WALLET_ADDRASS> --tfuel=10000 --password=qwertyuiop --seq=$(($SEQ+1))
+npx truffle deploy --network theta_privatenet
 ```
 
+If you need to force then use
+
+```
+npx truffle deploy --network theta_privatenet --reset
+```
+
+Starting the Ethereum server (Ganache)
+```
+npm run ganache
+```
+
+Token deploy on Ethereum server (Ganache)
+```
+npx truffle deploy --network development
+```
+
+Get the balance of the deployed token on Theta Network. *It should be ZERO now
+```
+npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet
+```
+
+Get the balance of the deployed token on Ethereum Network (Ganache). *It should be zero 1000
+```
+npx truffle exec scripts/eth-token-balance.js --network development
+```
+
+Now we can try to start the bridge listener, so it can start listening transactions.
+This is a service that will keep listing the blockchain transactions.
+```
+node scripts/eth-tnt-bridge.js
+```
+
+Now we can send from Ethereum network to Theta network
+```
+npx truffle exec scripts/eth-tnt-transfer.js --network development         
+```
+
+Now it should have 999 tokens on ETH and 1 on THETA
+
+```
+npx truffle exec scripts/tnt-token-balance.js --network theta_privatenet
+npx truffle exec scripts/eth-token-balance.js --network development
+```
 
 
-    export SEQ=`arch -arch x86_64 ./thetacli query account --address=0x2E833968E5bB786Ae419c4d13189fB081Cc43bab | grep sequence | grep -o '[[:digit:]]\+'`
+## Known issues
 
-    arch -arch x86_64 ./thetacli tx send --chain="privatenet" --from=0x2E833968E5bB786Ae419c4d13189fB081Cc43bab --to=0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A --tfuel=1000 --password=qwertyuiop --seq=$(($SEQ+1))
+_Since I am not using the testnet directly but GANACHE and Theta private network, and I am not using the same private keys, the signature won't match. So the bridge won't mint correctly. So we had to disable it for testing purposes._
 
-
-
+**Uncomment the following lines to check the signature on contracts/BridgeBase.sol**
+```
+// bytes32 message = keccak256(abi.encodePacked(from, to, amount, nonce));
+// require(recoverSigner(message, signature) == from, "wrong signature");
+```

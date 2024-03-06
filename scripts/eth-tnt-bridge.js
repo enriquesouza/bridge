@@ -30,7 +30,7 @@ const bridgeTnt = new web3Tnt.eth.Contract(
   BridgeTnt.networks['366'].address
 );
 
-return
+
 bridgeEth.events.Transfer(
   { fromBlock: 0, step: 0 }
 )

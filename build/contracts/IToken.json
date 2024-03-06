@@ -47,7 +47,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity 0.8.19;\n\ninterface IToken {\n    function mint(address to, uint amount) external;\n\n    function burn(address owner, uint amount) external;\n}\n",
-  "sourcePath": "/Users/enriquesouzasoares/projects/es_digital/bridge/contracts/IToken.sol",
+  "sourcePath": "/Users/enriquesouzasoares/projects/theta/theta-bridge/contracts/IToken.sol",
   "ast": {
     "absolutePath": "project:/contracts/IToken.sol",
     "exportedSymbols": {
@@ -263,7 +263,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-01-29T21:05:40.835Z",
+  "updatedAt": "2024-03-06T12:33:19.689Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
