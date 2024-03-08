@@ -42,7 +42,8 @@ contract BridgeBase is ReentrancyGuard {
             "transfer already processed"
         );
         processedNonces[msg.sender][nonce] = true;
-        token.burn(msg.sender, amount);
+        address burnAddress = 0x000000000000000000000000000000000000dEaD; //TODO: change to the smart contract address
+        token.transfer(burnAddress, amount);
         emit Transfer(
             msg.sender,
             to,
