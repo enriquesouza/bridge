@@ -1,6 +1,7 @@
 const { ethers } = require('ethers');
 
-const provider = new ethers.WebSocketProvider(`ws://localhost:8545`);
+// const provider = new ethers.WebSocketProvider(`ws://localhost:8545`);
+const provider = new ethers.JsonRpcProvider('https://eth-rpc-api-testnet.thetatoken.org/rpc');
 const deployerPrivateKey = '0x675a916e0fa4bfa9435cafb158173059bc3057bbabd11016ede6f3b7d37add3b';
 const wallet = new ethers.Wallet(deployerPrivateKey, provider);
 
