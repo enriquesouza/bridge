@@ -24,7 +24,7 @@ module.exports = async function (deployer, network, addresses) {
 
     // Update ReplayToken's admin to BridgeEth's address
     await replayToken.updateAdmin(bridgeEth.address);
-  } else if (network === 'theta_privatenet') {
+  } else if (network === 'theta_testnet') {
     await deployer.deploy(BridgeTnt, replayToken.address);
     const bridgeTnt = await BridgeTnt.deployed();
 

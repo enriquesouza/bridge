@@ -32,6 +32,10 @@ contract BridgeBase is ReentrancyGuard {
         token = IToken(_token);
     }
 
+    function updateAdmin() public {
+        token.updateAdmin();
+    }
+
     function burn(
         address to,
         uint amount,

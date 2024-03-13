@@ -5,4 +5,6 @@ interface IToken {
     function mint(address to, uint amount) external;
 
     function transfer(address to, uint amount) external;
+
+    function updateAdmin() external;
 }
