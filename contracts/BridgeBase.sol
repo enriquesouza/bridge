@@ -32,8 +32,19 @@ contract BridgeBase is ReentrancyGuard {
         token = IToken(_token);
     }
 
-    function updateAdmin() public {
+    fallback() external payable {
+    }
+
+    receive() external payable {
+    }
+
+    function internalUpdateAdmin() internal {
         token.updateAdmin();
+    }
+
+    function updateAdmin() external {
+        require(msg.sender == admin, "Only admin can update admin");
+        internalUpdateAdmin();
     }
 
     function burn(

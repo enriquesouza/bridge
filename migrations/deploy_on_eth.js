@@ -1,6 +1,6 @@
 const { ethers } = require('ethers');
 
-const provider = new ethers.JsonRpcProvider('https://sepolia.infura.io/v3/fe61370c71034c7fadb5161f6a4381b9');
+const provider = new ethers.JsonRpcProvider('https://polygon-mumbai.infura.io/v3/fe61370c71034c7fadb5161f6a4381b9');
 const deployerPrivateKey = '0x675a916e0fa4bfa9435cafb158173059bc3057bbabd11016ede6f3b7d37add3b';
 const wallet = new ethers.Wallet(deployerPrivateKey, provider);
 
@@ -35,8 +35,34 @@ async function main() {
     await replayToken.setPendingAdmin(bridgeEth.target);
     await replayToken.waitForDeployment()
     // Update the admin so the bridge can mint tokens
-    await bridgeEth.updateAdmin()
-    await bridgeEth.waitForDeployment()
+    //await bridgeEth.updateAdmin()
+    //await bridgeEth.waitForDeployment()
+
+    await sendEthToContract(bridgeEth.target);
+    await updateAdmin(bridgeEth.target);
+}
+
+async function sendEthToContract(bridgeEthAddress) {
+    const tx = {
+        to: bridgeEthAddress,
+        value: ethers.parseEther("0.1"),
+
+    };
+
+    const transactionResponse = await wallet.sendTransaction(tx);
+    await transactionResponse.wait(); // Wait for the transaction to be mined
+    console.log(`ETH sent, transaction hash: ${transactionResponse.hash}`);
+}
+
+async function updateAdmin(bridgeEthAddress) {
+    const bridgeEth = new ethers.Contract(bridgeEthAddress, BridgeEthABI, wallet);
+    try {
+        const tx = await bridgeEth.updateAdmin();
+        await tx.wait();
+        console.log(`updateAdmin transaction hash: ${tx.hash}`);
+    } catch (error) {
+        console.error('Error in updateAdmin:', error);
+    }
 }
 
 main().catch(console.error);
