@@ -1,0 +1,16 @@
+I had to alter the bridge contract and deploy a new version, so we can add allowances.
+
+
+❯ node scripts/deploy_on_eth.js
+Contract deployed to: 0xCAF714B05f89254Ea7ECa464378bD45a10c1dBAE
+Bridge deployed to: 0x443a0232E358A58245ad39475769b5060301ffc2
+ETH sent, transaction hash: 0xbd2b6daa95002ca4bb1ddec873d8dd86a6ebd898d62e0777f3290f350411767d
+updateAdmin transaction hash: 0x480786dff0ad3b6817d508dd34020ad7746e60efd6ce9b7631fddeba7f991a9f
+
+
+
+❯ node scripts/deploy_on_theta.js
+Contract deployed to: 0x3E637cDD3Be14a69b0756F387b94C8bF635BE487
+Bridge deployed to: 0x52CC37b819868713D8ed7514BF6075d71e78E6dE
+THETA sent, transaction hash: 0x04ca3a7c9e0ff936380f29e39bc3f037582df4d021282e2da6b54020f34029f7
+updateAdmin transaction hash: 0xec2fd1ac76e6a521dad42cc85eefd052930cef617d1462e1106cd369231dbe08

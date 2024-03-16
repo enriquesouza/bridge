@@ -1,7 +1,7 @@
 const ethers = require('ethers')
 const ethProvider = new ethers.WebSocketProvider('wss://polygon-mumbai.infura.io/ws/v3/fe61370c71034c7fadb5161f6a4381b9');
 const ethBridgeContractABI = require('../build/contracts/BridgeEth.json').abi;
-const ethBridgeContractAddress = '0x7eBf9fCaC5FDe523c3Be67cF1b30b11F8a9C1571'
+const ethBridgeContractAddress = '0x443a0232E358A58245ad39475769b5060301ffc2'
 const ethBridgeContract = new ethers.Contract(ethBridgeContractAddress, ethBridgeContractABI, ethProvider);
 const deployerPrivateKey = '0x675a916e0fa4bfa9435cafb158173059bc3057bbabd11016ede6f3b7d37add3b';
 const wallet = new ethers.Wallet(deployerPrivateKey, ethProvider);

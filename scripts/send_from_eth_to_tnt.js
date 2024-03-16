@@ -20,23 +20,31 @@ const send = async (done) => {
   const nonce = 1;
 
 
-  const tokenAddress = '0xD393A1a8a189F9803325188ea6Dc21B1c2fe75EF'; // Token contract address
+  const tokenAddress = '0xCAF714B05f89254Ea7ECa464378bD45a10c1dBAE'; // Token contract address
   const tokenContract = new ethers.Contract(tokenAddress, TokenEthArtifact.abi, signer);
   
-  const bridgeEthAddress = '0x7eBf9fCaC5FDe523c3Be67cF1b30b11F8a9C1571';
+  const bridgeEthAddress = '0x443a0232E358A58245ad39475769b5060301ffc2';
   const bridgeEth = new ethers.Contract(bridgeEthAddress, BridgeEthArtifact.abi, signer);
 
   const amount = ethers.parseUnits('1', 'ether');
-  const accounts = await signer.getAddress();
+  const signerAddress = await signer.getAddress();
+
+  // Check allowance
+  const allowance = await tokenContract.allowance(signerAddress, bridgeEthAddress);
+  if (allowance < amount) {
+    // Approve the bridge contract to spend tokens
+    const approveTx = await tokenContract.approve(bridgeEthAddress, amount);
+    await approveTx.wait(); // Wait for the transaction to be mined
+    console.log(`Approved ${amount} tokens for the bridge contract.`);
+  }
 
   const abiCoder = ethers.AbiCoder.defaultAbiCoder()
   const types = ['address', 'address', 'uint256', 'uint256'];
-  const values = [accounts, accounts, amount, nonce];
+  const values = [signerAddress, signerAddress, amount, nonce];
   const encodedData = abiCoder.encode(types, values);
   const messageHash = ethers.keccak256(encodedData);
   const signature = await signer.signMessage(messageHash);
-  await bridgeEth.burn(accounts, amount, nonce, signature);
-  done();
+  await bridgeEth.burn(signerAddress, amount, nonce, signature);
 };
 
 send()
