@@ -1,6 +1,5 @@
 const Web3 = require('web3')
-const web3 = new Web3('https://eth-rpc-api.thetatoken.org/rpc')
-const chainID = 361 // for the Theta Mainnet
+const web3 = new Web3('https://eth-rpc-api-testnet.thetatoken.org/rpc')
 
 // get latest block number
 web3.eth.getBlockNumber().then(console.log)

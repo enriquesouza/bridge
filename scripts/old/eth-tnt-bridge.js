@@ -1,6 +1,6 @@
 const Web3 = require('web3');
-const BridgeEth = require('../build/contracts/BridgeEth.json');
-const BridgeTnt = require('../build/contracts/BridgeTnt.json');
+const BridgeEth = require('../../build/contracts/BridgeEth.json');
+const BridgeTnt = require('../../build/contracts/BridgeTnt.json');
 const web3Eth = new Web3(`ws://localhost:8545`);
 const web3Tnt = new Web3('ws://127.0.0.1:18889');
 
