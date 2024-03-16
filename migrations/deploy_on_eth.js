@@ -35,9 +35,6 @@ async function main() {
     await replayToken.setPendingAdmin(bridgeEth.target);
     await replayToken.waitForDeployment()
     // Update the admin so the bridge can mint tokens
-    //await bridgeEth.updateAdmin()
-    //await bridgeEth.waitForDeployment()
-
     await sendEthToContract(bridgeEth.target);
     await updateAdmin(bridgeEth.target);
 }

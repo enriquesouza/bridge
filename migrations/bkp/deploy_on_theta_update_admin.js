@@ -1,11 +1,9 @@
 const { ethers } = require('ethers');
 
-const provider = new ethers.JsonRpcProvider('https://sepolia.infura.io/v3/fe61370c71034c7fadb5161f6a4381b9');
+const provider = new ethers.JsonRpcProvider('https://eth-rpc-api-testnet.thetatoken.org/rpc');
 const deployerPrivateKey = '0x675a916e0fa4bfa9435cafb158173059bc3057bbabd11016ede6f3b7d37add3b';
 const wallet = new ethers.Wallet(deployerPrivateKey, provider);
 const bridgeEthAddress = '0x69af4b2f553215bfba8687df5349d483c44d69d1';
-
-
 
 async function sendEthToContract() {
     const tx = {
@@ -20,7 +18,7 @@ async function sendEthToContract() {
 }
 
 async function updateAdmin() {
-    const BridgeEthABI = require('../build/contracts/BridgeEth.json').abi;
+    const BridgeEthABI = require('../../build/contracts/BridgeEth.json').abi;
     const bridgeEth = new ethers.Contract(bridgeEthAddress, BridgeEthABI, wallet);
 
     try {

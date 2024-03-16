@@ -6,8 +6,8 @@ const wallet = new ethers.Wallet(deployerPrivateKey, provider);
 
 const ReplayTokenABI = require('../build/contracts/ReplayToken.json').abi;
 const ReplayTokenBytecode = require('../build/contracts/ReplayToken.json').bytecode;
-const BridgeTntABI = require('../build/contracts/BridgeTnt.json').abi;
-const BridgeTntBytecode = require('../build/contracts/BridgeTnt.json').bytecode;
+const BridgeABI = require('../build/contracts/BridgeTnt.json').abi;
+const BridgeBytecode = require('../build/contracts/BridgeTnt.json').bytecode;
 
 async function deployContract(contractABI, contractBytecode, constructorArgs = []) {
     const factory = new ethers.ContractFactory(contractABI, contractBytecode, wallet);
@@ -29,10 +29,43 @@ async function main() {
         wallet.address // Temporary admin, to be updated later
     ]);
 
-    const bridgeTnt = await deployContract(BridgeTntABI, BridgeTntBytecode, [replayToken.target]);
-    await bridgeTnt.waitForDeployment()
-    await replayToken.setPendingAdmin(bridgeTnt.target);
+    const bridge = await deployContract(BridgeABI, BridgeBytecode, [replayToken.target]);
+    await bridge.waitForDeployment()
+    // Set the pending admin of the token
+    await replayToken.setPendingAdmin(bridge.target);
     await replayToken.waitForDeployment()
+
+    await sendEthToContract(bridge.target);
+    await updateAdmin(bridge.target);
+}
+
+async function sendEthToContract(bridgeAddress) {
+    const tx = {
+        to: bridgeAddress,
+        value: ethers.parseEther("0.1"),
+
+    };
+
+    const transactionResponse = await wallet.sendTransaction(tx);
+    await transactionResponse.wait(); // Wait for the transaction to be mined
+    console.log(`THETA sent, transaction hash: ${transactionResponse.hash}`);
+}
+
+async function updateAdmin(bridgeAddress) {
+    const bridge = new ethers.Contract(bridgeAddress, BridgeABI, wallet);
+    try {
+        const tx = await bridge.updateAdmin();
+        await tx.wait();
+        console.log(`updateAdmin transaction hash: ${tx.hash}`);
+    } catch (error) {
+        console.error('Error in updateAdmin:', error);
+    }
 }
 
 main().catch(console.error);
+
+//await tokenInstance.setPendingAdmin(pendingAdmin, { from: admin });
+// await tokenInstance.updateAdmin({ from: pendingAdmin });
+// const updatedAdmin = await tokenInstance.admin();
+// npx hardhat verify --network sepolia 0x764E75692baC03D8420Ce52E28cC926E103f8eC1 "ReplayToken" "RPT" 18 "1000000000000000000000000" "0x2dfFF737EB054DED9795d96d6d9B9909896BB940" "100" "0x2dfFF737EB054DED9795d96d6d9B9909896BB940" "500000000000000000000000" "0x2dfFF737EB054DED9795d96d6d9B9909896BB940"
+// npx hardhat verify --constructor-args constructor.js 0x764E75692baC03D8420Ce52E28cC926E103f8eC1
