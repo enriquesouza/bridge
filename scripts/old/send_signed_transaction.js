@@ -24,7 +24,7 @@ web3.eth.getTransactionCount(account1, (err, txCount) => {
   const txObject = {
     nonce: web3.utils.toHex(txCount),
     to: account2,
-    value: web3.utils.toHex(web3.utils.toWei('1000', 'ether')),
+    value: web3.utils.toHex(web3.utils.toWei('1', 'ether')),
     gasLimit: web3.utils.toHex(21000),
     gasPrice: web3.utils.toHex(web3.utils.toWei('4000', 'gwei')),
     chainId: chainID

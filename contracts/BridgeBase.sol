@@ -32,11 +32,9 @@ contract BridgeBase is ReentrancyGuard {
         token = IToken(_token);
     }
 
-    fallback() external payable {
-    }
+    fallback() external payable {}
 
-    receive() external payable {
-    }
+    receive() external payable {}
 
     function internalUpdateAdmin() internal {
         token.updateAdmin();
@@ -58,8 +56,18 @@ contract BridgeBase is ReentrancyGuard {
             "transfer already processed"
         );
         processedNonces[msg.sender][nonce] = true;
-        address burnAddress = 0x000000000000000000000000000000000000dEaD; //TODO: change to the smart contract address
-        token.transfer(burnAddress, amount);
+
+        address burnAddress = 0x000000000000000000000000000000000000dEaD;
+
+        // Ensure the contract has the necessary allowance
+        require(
+            token.allowance(msg.sender, address(this)) >= amount,
+            "Insufficient allowance"
+        );
+
+        // Transfer tokens from the user to the burn address
+        token.transferFrom(msg.sender, burnAddress, amount);
+
         emit Transfer(
             msg.sender,
             to,
