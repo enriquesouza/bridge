@@ -1,90 +1,139 @@
-# Minting on Replays
-
-This function, has the mint function and also transfer from the contract to the user.
-
-```
-❯ node scripts/deploy_on_eth.js
-Token deployed to: 0xF250DCE9AAAE0220523310483f51418051Ba5e8c
-Bridge deployed to: 0x367Fa6E0a8092E4255F2DBc565d0598998D45247
-ETH sent, transaction hash: 0x7f5211717486b7cec2a5deca6601d215f6ec004ad2736cd943e5871198ba2513
-updateAdmin transaction hash: 0x6ab574287c046bf9a224010091150c93bc506d60949b5de41686c39cc19ed8da
-
-
-
-❯ node scripts/deploy_on_theta.js
-Token deployed to: 0x2D46381bB20E533EF9644b9cD7DcAAe88529ebd9
-Bridge deployed to: 0xEe285da7c361Da4D1486b570322FB273A6304a19
-THETA sent, transaction hash: 0x628910c4d41249c3bf6b33ee741c4d18a3bbdea63bcf8a8bd343f6fea5e464e8
-updateAdmin transaction hash: 0xd4c727a9f0887451c57e2482a666754a3244bc8da69ffead814002e894f3d864
-```
-
-Working transactions
-
-```
-❯ node scripts/eth_bridge.js
-Debugger attached.
-Listening to Transfer events on MATIC...
-Transfer event detected: from 0x2dfFF737EB054DED9795d96d6d9B9909896BB940 to 0x2dfFF737EB054DED9795d96d6d9B9909896BB940, value: 1000000000000000000
-Event details: 0x6b5738f028fa82c4420c37cc6f0501f8e32db61fc194c99e2ad2479c18711cb15bad2c2f13e718a19652187ac088389abce5a2e68fc313a90c5309e20aee03131b
-ContractTransactionResponse {
-  provider: JsonRpcProvider {},
-  blockNumber: null,
-  blockHash: null,
-  index: undefined,
-  hash: '0x66f7713c000a1882d489d1091510b58f2ebd1a1d0d29387d61ca7007f39a8087',
-  type: 0,
-  to: '0xEe285da7c361Da4D1486b570322FB273A6304a19',
-  from: '0x2dfFF737EB054DED9795d96d6d9B9909896BB940',
-  nonce: 54,
-  gasLimit: 70833n,
-  gasPrice: 4000000000000n,
-  maxPriorityFeePerGas: null,
-  maxFeePerGas: null,
-  maxFeePerBlobGas: null,
-  data: '0x52555702000000000000000000000000ee285da7c361da4d1486b570322fb273a6304a19000000000000000000000000ee285da7c361da4d1486b570322fb273a6304a190000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000000000065f6687600000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000419f6a3345adfd44e7c5633466ae053397a212675d96251563db899a9743317de64f66759f46275def53ce0a62ebd9f1ad1bcc27a7935a36378568eb0efd2fc4891b00000000000000000000000000000000000000000000000000000000000000',
-  value: 0n,
-  chainId: 365n,
-  signature: Signature { r: "0x76c4b11ef9ccb0bf2ab427120139f32c5101709a821fad673370caf7f60a5215", s: "0x5e6d978d475468de46ba8198387ee0b78181fed6da45894094aaaf82d21d5276", yParity: 0, networkV: 765 },
-  accessList: null,
-  blobVersionedHashes: null
-}
-ContractTransactionResponse {
-  provider: JsonRpcProvider {},
-  blockNumber: null,
-  blockHash: null,
-  index: undefined,
-  hash: '0x55125d178f46d04bd86b4c31113bf3c4d9508395b91e9a1f62168bd55f5688f2',
-  type: 0,
-  to: '0xEe285da7c361Da4D1486b570322FB273A6304a19',
-  from: '0x2dfFF737EB054DED9795d96d6d9B9909896BB940',
-  nonce: 55,
-  gasLimit: 43761n,
-  gasPrice: 4000000000000n,
-  maxPriorityFeePerGas: null,
-  maxFeePerGas: null,
-  maxFeePerBlobGas: null,
-  data: '0x3e20e1190000000000000000000000002dfff737eb054ded9795d96d6d9b9909896bb9400000000000000000000000000000000000000000000000000de0b6b3a7640000',
-  value: 0n,
-  chainId: 365n,
-  signature: Signature { r: "0x9772ee70e5338b0c4a8751b8d13cf53446b5409b612ea8d04be1622948f90e4f", s: "0x350b5e28008d95671a3858d88a9fd608a0165219036d18f30693a450300d636a", yParity: 1, networkV: 766 },
-  accessList: null,
-  blobVersionedHashes: null
-}
-```
-
-
-
-
-Listening events on THETA
-
-Mint on MATIC
-https://mumbai.polygonscan.com/tx/0x55bce00adc7189c361b7b8f8621699d60ac2fdc027a1fe094f2a05f14b6c9969
-
-Send from MATIC to the user
-https://mumbai.polygonscan.com/tx/0xd73ddf5a9f237426a549e1695038998b2c343733884508cd3d092f7e2ea72669
-
-
-```
+Node.js v20.10.0
+❯ node scripts/tnt_bridge.js
+[]
+^C
+❯ node scripts/tnt_bridge.js
+[
+  {
+    logIndex: 2,
+    transactionIndex: 1,
+    transactionHash: '0x554da2b2e1a0342a2722be603e39f854126e32af925f4255e1d1d56046107bfb',
+    blockHash: '0x9f9b58f7a486899065fe93e78810b64b4cb73bf6650f029b7ec6af9618001cc9',
+    blockNumber: 25452084,
+    address: '0xEe285da7c361Da4D1486b570322FB273A6304a19',
+    type: 'mined',
+    id: 'log_cd6e8b2e',
+    returnValues: Result {
+      '0': '0x2dfFF737EB054DED9795d96d6d9B9909896BB940',
+      '1': '0x2dfFF737EB054DED9795d96d6d9B9909896BB940',
+      '2': '1000000000000000000',
+      '3': '1710669130',
+      '4': '2',
+      '5': '0xe5383c4f19fd7bc753e0beef627b3f6be58c7335cfef81e6a7fb7549af9ca90578074dd474d21ece0ea00e0fae456d22887acd09b994559d7b2a297b9808ef641c',
+      '6': '0',
+      from: '0x2dfFF737EB054DED9795d96d6d9B9909896BB940',
+      to: '0x2dfFF737EB054DED9795d96d6d9B9909896BB940',
+      amount: '1000000000000000000',
+      date: '1710669130',
+      nonce: '2',
+      signature: '0xe5383c4f19fd7bc753e0beef627b3f6be58c7335cfef81e6a7fb7549af9ca90578074dd474d21ece0ea00e0fae456d22887acd09b994559d7b2a297b9808ef641c',
+      step: '0'
+    },
+    event: 'Transfer',
+    signature: '0xce5a9b86edd3b998c3948a7934c7ecf7dba73c4c5bcf56cf576bca4aa2beeb30',
+    raw: {
+      data: '0x0000000000000000000000002dfff737eb054ded9795d96d6d9b9909896bb9400000000000000000000000002dfff737eb054ded9795d96d6d9b9909896bb9400000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000000000065f6bd4a000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000041e5383c4f19fd7bc753e0beef627b3f6be58c7335cfef81e6a7fb7549af9ca90578074dd474d21ece0ea00e0fae456d22887acd09b994559d7b2a297b9808ef641c00000000000000000000000000000000000000000000000000000000000000',
+      topics: [Array]
+    }
+  }
+]
+^C
+❯ node scripts/tnt_bridge.js
+[
+  {
+    logIndex: 2,
+    transactionIndex: 1,
+    transactionHash: '0x554da2b2e1a0342a2722be603e39f854126e32af925f4255e1d1d56046107bfb',
+    blockHash: '0x9f9b58f7a486899065fe93e78810b64b4cb73bf6650f029b7ec6af9618001cc9',
+    blockNumber: 25452084,
+    address: '0xEe285da7c361Da4D1486b570322FB273A6304a19',
+    type: 'mined',
+    id: 'log_cd6e8b2e',
+    returnValues: Result {
+      '0': '0x2dfFF737EB054DED9795d96d6d9B9909896BB940',
+      '1': '0x2dfFF737EB054DED9795d96d6d9B9909896BB940',
+      '2': '1000000000000000000',
+      '3': '1710669130',
+      '4': '2',
+      '5': '0xe5383c4f19fd7bc753e0beef627b3f6be58c7335cfef81e6a7fb7549af9ca90578074dd474d21ece0ea00e0fae456d22887acd09b994559d7b2a297b9808ef641c',
+      '6': '0',
+      from: '0x2dfFF737EB054DED9795d96d6d9B9909896BB940',
+      to: '0x2dfFF737EB054DED9795d96d6d9B9909896BB940',
+      amount: '1000000000000000000',
+      date: '1710669130',
+      nonce: '2',
+      signature: '0xe5383c4f19fd7bc753e0beef627b3f6be58c7335cfef81e6a7fb7549af9ca90578074dd474d21ece0ea00e0fae456d22887acd09b994559d7b2a297b9808ef641c',
+      step: '0'
+    },
+    event: 'Transfer',
+    signature: '0xce5a9b86edd3b998c3948a7934c7ecf7dba73c4c5bcf56cf576bca4aa2beeb30',
+    raw: {
+      data: '0x0000000000000000000000002dfff737eb054ded9795d96d6d9b9909896bb9400000000000000000000000002dfff737eb054ded9795d96d6d9b9909896bb9400000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000000000065f6bd4a000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000041e5383c4f19fd7bc753e0beef627b3f6be58c7335cfef81e6a7fb7549af9ca90578074dd474d21ece0ea00e0fae456d22887acd09b994559d7b2a297b9808ef641c00000000000000000000000000000000000000000000000000000000000000',
+      topics: [Array]
+    }
+  }
+]
+❯ node scripts/tnt_bridge.js
+Setting up event fetching on THETA...
+Starting from block 25452082
+[
+  EventLog {
+    provider: JsonRpcProvider {},
+    transactionHash: '0x554da2b2e1a0342a2722be603e39f854126e32af925f4255e1d1d56046107bfb',
+    blockHash: '0x9f9b58f7a486899065fe93e78810b64b4cb73bf6650f029b7ec6af9618001cc9',
+    blockNumber: 25452084,
+    removed: false,
+    address: '0xEe285da7c361Da4D1486b570322FB273A6304a19',
+    data: '0x0000000000000000000000002dfff737eb054ded9795d96d6d9b9909896bb9400000000000000000000000002dfff737eb054ded9795d96d6d9b9909896bb9400000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000000000065f6bd4a000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000041e5383c4f19fd7bc753e0beef627b3f6be58c7335cfef81e6a7fb7549af9ca90578074dd474d21ece0ea00e0fae456d22887acd09b994559d7b2a297b9808ef641c00000000000000000000000000000000000000000000000000000000000000',
+    topics: [
+      '0xce5a9b86edd3b998c3948a7934c7ecf7dba73c4c5bcf56cf576bca4aa2beeb30',
+      '0x0000000000000000000000000000000000000000000000000000000000000000'
+    ],
+    index: 2,
+    transactionIndex: 1,
+    interface: Interface {
+      fragments: [Array],
+      deploy: [ConstructorFragment],
+      fallback: [FallbackFragment],
+      receive: true
+    },
+    fragment: EventFragment {
+      type: 'event',
+      inputs: [Array],
+      name: 'Transfer',
+      anonymous: false
+    },
+    args: Result(7) [
+      '0x2dfFF737EB054DED9795d96d6d9B9909896BB940',
+      '0x2dfFF737EB054DED9795d96d6d9B9909896BB940',
+      1000000000000000000n,
+      1710669130n,
+      2n,
+      '0xe5383c4f19fd7bc753e0beef627b3f6be58c7335cfef81e6a7fb7549af9ca90578074dd474d21ece0ea00e0fae456d22887acd09b994559d7b2a297b9808ef641c',
+      0n
+    ]
+  }
+]
+Updated fromBlock to 25452085
+[]
+Updated fromBlock to 25452087
+[]
+Updated fromBlock to 25452089
+[]
+Updated fromBlock to 25452091
+[]
+Updated fromBlock to 25452093
+[]
+Updated fromBlock to 25452095
+[]
+Updated fromBlock to 25452097
+[]
+Updated fromBlock to 25452099
+[]
+Updated fromBlock to 25452101
+[]
+Updated fromBlock to 25452103
+^C
 ❯ node scripts/tnt_bridge.js
 Setting up event fetching on THETA...
 Starting from block 25452082
@@ -267,4 +316,87 @@ Updated fromBlock to 25452095
 Updated fromBlock to 25452097
 []
 Updated fromBlock to 25452099
-```
+[]
+Updated fromBlock to 25452101
+[]
+Updated fromBlock to 25452103
+[]
+Updated fromBlock to 25452105
+[]
+Updated fromBlock to 25452107
+Error fetching events: Error: could not coalesce error (error={ "code": -32000, "message": "failed to get theta RPC response: Post \"http://theta-node-rpc-testnet.thetatoken.org:16888/rpc\": EOF" }, payload={ "id": 27, "jsonrpc": "2.0", "method": "eth_chainId", "params": [  ] }, code=UNKNOWN_ERROR, version=6.11.1)
+    at makeError (/Users/enriquesouzasoares/projects/theta/theta-bridge/node_modules/ethers/lib.commonjs/utils/errors.js:129:21)
+    at JsonRpcProvider.getRpcError (/Users/enriquesouzasoares/projects/theta/theta-bridge/node_modules/ethers/lib.commonjs/providers/provider-jsonrpc.js:722:41)
+    at /Users/enriquesouzasoares/projects/theta/theta-bridge/node_modules/ethers/lib.commonjs/providers/provider-jsonrpc.js:302:45
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  code: 'UNKNOWN_ERROR',
+  error: {
+    code: -32000,
+    message: 'failed to get theta RPC response: Post "http://theta-node-rpc-testnet.thetatoken.org:16888/rpc": EOF'
+  },
+  payload: { method: 'eth_chainId', params: [], id: 27, jsonrpc: '2.0' },
+  shortMessage: 'could not coalesce error'
+}
+[]
+Updated fromBlock to 25452109
+[]
+Updated fromBlock to 25452111
+[]
+Updated fromBlock to 25452113
+[]
+Updated fromBlock to 25452115
+[]
+Updated fromBlock to 25452117
+[]
+Updated fromBlock to 25452119
+[]
+Updated fromBlock to 25452121
+[]
+Updated fromBlock to 25452123
+[]
+Updated fromBlock to 25452125
+[]
+Updated fromBlock to 25452127
+[]
+Updated fromBlock to 25452129
+[]
+Updated fromBlock to 25452131
+[]
+Updated fromBlock to 25452133
+[]
+Updated fromBlock to 25452135
+[]
+Updated fromBlock to 25452137
+[]
+Updated fromBlock to 25452139
+[]
+Updated fromBlock to 25452141
+[]
+Updated fromBlock to 25452143
+[]
+Updated fromBlock to 25452145
+[]
+Updated fromBlock to 25452147
+[]
+Updated fromBlock to 25452149
+[]
+Updated fromBlock to 25452151
+[]
+Updated fromBlock to 25452153
+[]
+Updated fromBlock to 25452155
+[]
+Updated fromBlock to 25452157
+[]
+Updated fromBlock to 25452159
+[]
+Updated fromBlock to 25452161
+[]
+Updated fromBlock to 25452163
+[]
+Updated fromBlock to 25452165
+[]
+Updated fromBlock to 25452167
+[]
+Updated fromBlock to 25452169
+[]
