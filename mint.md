@@ -20,6 +20,12 @@ updateAdmin transaction hash: 0xd4c727a9f0887451c57e2482a666754a3244bc8da69ffead
 
 Working transactions
 
+Mint THETA to the bridge
+https://testnet-explorer.thetatoken.org/txs/0x554da2b2e1a0342a2722be603e39f854126e32af925f4255e1d1d56046107bfb#Logs
+
+Send THETA to the user
+https://testnet-explorer.thetatoken.org/txs/0x55125d178f46d04bd86b4c31113bf3c4d9508395b91e9a1f62168bd55f5688f2
+
 ```
 ❯ node scripts/eth_bridge.js
 Debugger attached.

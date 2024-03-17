@@ -16,6 +16,20 @@ Explorer: https://testnet-explorer.thetatoken.org/
 Chain ID: 365
 ```
 
+https://github.com/thetatoken/theta-eth-rpc-adaptor
+
+
+# Replay contract
+
+https://github.com/imaginereplay/replay/tree/main/smart-contracts
+
+https://github.com/imaginereplay/replay/blob/main/smart-contracts/contracts/ReplayToken.sol
+
+## Ethers upgrade to 6.0
+
+https://docs.ethers.org/v6/migrating/
+https://github.com/ethers-io/ethers.js/issues/3725
+
 ## Theta local installation
 
 ### On MacOS
