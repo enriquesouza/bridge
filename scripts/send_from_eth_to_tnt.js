@@ -17,13 +17,13 @@ console.log(`Address: ${wallet.address}`);
 const send = async (done) => {
   //TODO: Save the nonce somewhere to control it
   //TODO: Get the current nonce
-  const nonce = 14;
+  const nonce = 1;
 
 
-  const tokenAddress = '0xCAF714B05f89254Ea7ECa464378bD45a10c1dBAE'; // Token contract address
+  const tokenAddress = '0xF250DCE9AAAE0220523310483f51418051Ba5e8c'; // Token contract address eth
   const tokenContract = new ethers.Contract(tokenAddress, TokenEthArtifact.abi, signer);
   
-  const bridgeEthAddress = '0x443a0232E358A58245ad39475769b5060301ffc2';
+  const bridgeEthAddress = '0x367Fa6E0a8092E4255F2DBc565d0598998D45247';
   const bridgeEth = new ethers.Contract(bridgeEthAddress, BridgeEthArtifact.abi, signer);
 
   const amount = ethers.parseUnits('1', 'ether');

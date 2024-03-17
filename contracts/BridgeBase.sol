@@ -85,25 +85,26 @@ contract BridgeBase is ReentrancyGuard {
         uint amount,
         uint nonce,
         bytes calldata signature
-    ) internal nonReentrant {
+    ) internal {
         // TODO: use the signature for testnet and mainnet. Locally it will only work if you use the same private keys.
         // bytes32 message = keccak256(abi.encodePacked(from, to, amount, nonce));
         // require(recoverSigner(message, signature) == from, "wrong signature");
-        require(
-            processedNonces[from][nonce] == false,
-            "transfer already processed"
-        );
-        processedNonces[from][nonce] = true;
-        token.mint(to, amount);
-        emit Transfer(
-            from,
-            to,
-            amount,
-            block.timestamp,
-            nonce,
-            signature,
-            Step.Mint
-        );
+        // require(
+        //     processedNonces[from][nonce] == false,
+        //     "transfer already processed"
+        // );
+        // processedNonces[from][nonce] = true;
+        token.mint(amount);
+        // internalTransferReplayToken(to, amount);
+        // emit Transfer(
+        //     from,
+        //     to,
+        //     amount,
+        //     block.timestamp,
+        //     nonce,
+        //     signature,
+        //     Step.Mint
+        // );
     }
 
     function mint(
@@ -112,9 +113,17 @@ contract BridgeBase is ReentrancyGuard {
         uint amount,
         uint nonce,
         bytes calldata signature
-    ) external nonReentrant {
-        require(msg.sender == admin, "Only admin can mint coins");
+    ) external {
+        //require(msg.sender == admin, "Only admin can mint coins");
         internalMint(from, to, amount, nonce, signature);
+    }
+
+    function internalTransferReplayToken(address recipient, uint256 amount) internal  {
+        token.transfer(recipient, amount);
+    }
+
+    function transferReplayToken(address recipient, uint256 amount) external {
+        internalTransferReplayToken(recipient, amount);
     }
 
     function recoverSigner(

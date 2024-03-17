@@ -3,7 +3,7 @@ const web3 = new Web3('https://polygon-mumbai.infura.io/v3/fe61370c71034c7fadb51
 
 const ReplayTokenABI = require('../build/contracts/ReplayToken.json').abi;
 
-const address = '0xD393A1a8a189F9803325188ea6Dc21B1c2fe75EF'
+const address = '0xB88ea1933e9b783E57bdb4fDe85366C41D28D447'
 const contract = new web3.eth.Contract(ReplayTokenABI, address)
 
 contract.methods.totalSupply().call((err, result) => {
@@ -18,6 +18,6 @@ contract.methods.symbol().call((err, result) => {
     console.log("symbol:", result)
 })
 
-contract.methods.balanceOf('0x2dfFF737EB054DED9795d96d6d9B9909896BB940').call((err, result) => {
-    console.log("balance of 0x2dfFF737EB054DED9795d96d6d9B9909896BB940:", result, "RPT")
+contract.methods.balanceOf('0xAaAd0a442e094861A8C0F964E418fde595Df188F').call((err, result) => {
+    console.log("balance of the bridge 0xAaAd0a442e094861A8C0F964E418fde595Df188F:", result, "RPT")
 })

@@ -3,7 +3,7 @@ const web3 = new Web3('https://eth-rpc-api-testnet.thetatoken.org/rpc')
 
 const ReplayTokenABI = require('../build/contracts/ReplayToken.json').abi;
 
-const address = '0xA5e5Ebe054F99bf6f5f50B10D385fB4780949Fc4'
+const address = '0xFC5b4c76995B640730a149d22bD7074901082dB9'
 const contract = new web3.eth.Contract(ReplayTokenABI, address)
 
 contract.methods.totalSupply().call((err, result) => {
@@ -18,6 +18,6 @@ contract.methods.symbol().call((err, result) => {
     console.log("symbol:", result)
 })
 
-contract.methods.balanceOf('0x2dfFF737EB054DED9795d96d6d9B9909896BB940').call((err, result) => {
-    console.log("balance of 0x2dfFF737EB054DED9795d96d6d9B9909896BB940:", result, "RPT")
+contract.methods.balanceOf('0x63B2dcaCf06e25cB7843d2b15146e8b7f2adabE3').call((err, result) => {
+    console.log("balance of the bridge 0x63B2dcaCf06e25cB7843d2b15146e8b7f2adabE3:", result, "RPT")
 })
