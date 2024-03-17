@@ -17,7 +17,7 @@ console.log(`Address: ${wallet.address}`);
 const send = async (done) => {
   //TODO: Save the nonce somewhere to control it
   //TODO: Get the current nonce
-  const nonce = 1;
+  const nonce = 14;
 
 
   const tokenAddress = '0xCAF714B05f89254Ea7ECa464378bD45a10c1dBAE'; // Token contract address
@@ -45,6 +45,8 @@ const send = async (done) => {
   const messageHash = ethers.keccak256(encodedData);
   const signature = await signer.signMessage(messageHash);
   await bridgeEth.burn(signerAddress, amount, nonce, signature);
+
+  console.log("Transaction sent")
 };
 
 send()

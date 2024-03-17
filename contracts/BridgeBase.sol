@@ -79,13 +79,13 @@ contract BridgeBase is ReentrancyGuard {
         );
     }
 
-    function mint(
+    function internalMint(
         address from,
         address to,
         uint amount,
         uint nonce,
         bytes calldata signature
-    ) external nonReentrant {
+    ) internal nonReentrant {
         // TODO: use the signature for testnet and mainnet. Locally it will only work if you use the same private keys.
         // bytes32 message = keccak256(abi.encodePacked(from, to, amount, nonce));
         // require(recoverSigner(message, signature) == from, "wrong signature");
@@ -104,6 +104,17 @@ contract BridgeBase is ReentrancyGuard {
             signature,
             Step.Mint
         );
+    }
+
+    function mint(
+        address from,
+        address to,
+        uint amount,
+        uint nonce,
+        bytes calldata signature
+    ) external nonReentrant {
+        require(msg.sender == admin, "Only admin can mint coins");
+        internalMint(from, to, amount, nonce, signature);
     }
 
     function recoverSigner(
