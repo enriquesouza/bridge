@@ -24,8 +24,9 @@ async function deployContract() {
 
   // Deploy the contract with the specified nonce
   const contract = await factory.deploy({
-    nonce: nonce, // We can manually set the nonce, ours is 3, or 4.
+    nonce: 4, // We can manually set the nonce, ours is 3, or 4.
   });
+  // If the nonce already exists it will throw an error from EVM
 
   // The address can be known beforehand using the method described above
   console.log("Contract Address:", contract.target);
