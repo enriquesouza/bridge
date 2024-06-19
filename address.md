@@ -2,7 +2,7 @@
 
 ### Nonce
 
-The current nonce is 3. We must keep it in all networks.
+The current nonce is **2**. We must keep it in all networks.
 
 #
 
@@ -38,7 +38,7 @@ https://www.thetascan.io/download_txn/?hash=0xd9e8b48bf90683c20198d01e5b67325f8f
 The owner current sequence is 4, but it is not the smart contract:
 https://explorer.thetatoken.org/account/0xb6255e00a205bf421cd2633725c40ea07c5c62ae
 
-# **3 is the nonce**
+# **2 is the nonce**
 
 I also locally run some tests using the byte-code and the encode constructors parameters and I could see that it works. We can have the same address in different blockchains. We just need to ensure the byte-code, the encoded constructor parameters and the nonce.
 
