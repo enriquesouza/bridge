@@ -16,14 +16,19 @@ const fullBytecode = bytecode + constructorArgs;
 
 // Deploy the contract
 async function deployContract() {
-    // Create a Contract Factory
-    const factory = new ethers.ContractFactory([], fullBytecode, wallet);
+  // Get the current nonce for the wallet address
+  const nonce = await provider.getTransactionCount(wallet.address);
 
-    // Deploy the contract
-    const contract = await factory.deploy();
+  // Create a Contract Factory
+  const factory = new ethers.ContractFactory([], fullBytecode, wallet);
 
-    // The address can be known beforehand using the method described above
-    console.log('Contract Address:', contract.target);
+  // Deploy the contract with the specified nonce
+  const contract = await factory.deploy({
+    nonce: nonce, // We can manually set the nonce, ours is 3, or 4.
+  });
+
+  // The address can be known beforehand using the method described above
+  console.log("Contract Address:", contract.target);
 }
 
 deployContract().catch(console.error);
