@@ -26,9 +26,15 @@ async function deployContract() {
   // Create a Contract Factory
   const factory = new ethers.ContractFactory([], fullBytecode, wallet);
 
-  // Deploy the contract with the specified nonce
+  // Set a higher gas price (in wei) and gas limit
+  const gasPrice = ethers.parseUnits("30", "gwei"); // Example gas price of 50 gwei
+  const gasLimit = 2000000; // Example gas limit
+
+  // Deploy the contract with the specified nonce, gas price, and gas limit
   const contract = await factory.deploy({
-    nonce: 2, // Our is 2.
+    nonce: nonce,
+    gasPrice: gasPrice,
+    gasLimit: gasLimit,
   });
 
   // Wait for the deployment transaction to be mined
