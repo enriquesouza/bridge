@@ -1,8 +1,12 @@
-const { ethers } = require('ethers');
+const { ethers } = require("ethers");
 
 // const provider = new ethers.WebSocketProvider(`ws://localhost:8545`);
-const provider = new ethers.JsonRpcProvider('https://eth-rpc-api-testnet.thetatoken.org/rpc');
-const deployerPrivateKey = '0x675a916e0fa4bfa9435cafb158173059bc3057bbabd11016ede6f3b7d37add3b';
+const provider = new ethers.JsonRpcProvider(
+  //"https://eth-rpc-api-testnet.thetatoken.org/rpc"
+  "https://base-sepolia-rpc.publicnode.com"
+);
+const deployerPrivateKey =
+  "0x675a916e0fa4bfa9435cafb158173059bc3057bbabd11016ede6f3b7d37add3b";
 const wallet = new ethers.Wallet(deployerPrivateKey, provider);
 
 // The contract bytecode
@@ -26,25 +30,13 @@ async function deployContract() {
   const contract = await factory.deploy({
     nonce: 2, // Our is 2.
   });
-  // If the nonce already exists it will throw an error from EVM
+
+  // Wait for the deployment transaction to be mined
+  const receipt = await contract.deploymentTransaction().wait();
 
   // The address can be known beforehand using the method described above
   console.log("Contract Address:", contract.target);
+  console.log("Transaction Hash:", receipt.hash);
 }
 
 deployContract().catch(console.error);
-
-//  Contract created: 0x582a5e1b7c893df82993b92e5ea5bc6df16b81af
-//  Contract created: 0x764e75692bac03d8420ce52e28cc926e103f8ec1
-//  Contract created: 0x491f6cce029f97e0f91cfa165f2f6678423b92a2
-
-// On my tests
-
-/*
-❯ node migrations/0_deploy-replay.js
-    Contract Address: 0x582a5e1b7c893df82993B92E5eA5Bc6df16b81AF
-❯ node migrations/0_deploy-replay.js
-    Contract Address: 0x764E75692baC03D8420Ce52E28cC926E103f8eC1
-❯ node migrations/0_deploy-replay.js
-    Contract Address: 0x491f6cCe029F97E0F91cFa165F2f6678423B92a2
-*/
